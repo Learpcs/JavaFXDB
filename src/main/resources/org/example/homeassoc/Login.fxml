@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="322.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.homeassoc.tables.ResidentViewController">
+    <children>
+        <TableView fx:id="personView" layoutX="90.0" layoutY="73.0" prefHeight="200.0" prefWidth="226.0">
+            <columns>
+                <TableColumn fx:id="idColumn" prefWidth="75.0" text="id" />
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="name" />
+                <TableColumn fx:id="emailColumn" prefWidth="75.0" text="apparts" />
+            </columns>
+        </TableView>
+    </children>
+</Pane>
