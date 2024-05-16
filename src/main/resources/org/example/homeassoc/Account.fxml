@@ -7,16 +7,13 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.homeassoc.controller.ReceiptForServiceController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.homeassoc.controller.AccountViewController">
     <children>
-        <TableView fx:id="receiptForServiceView" layoutX="22.0" layoutY="23.0" prefHeight="200.0" prefWidth="456.0">
+        <TableView fx:id="view" layoutX="22.0" layoutY="23.0" prefHeight="200.0" prefWidth="456.0">
             <columns>
-                <TableColumn fx:id="column1" prefWidth="75.0" text="ReceiptID" />
-                <TableColumn fx:id="column2" prefWidth="75.0" text="Invoiced" />
-                <TableColumn fx:id="column3" prefWidth="75.0" text="IssueDate" />
-                <TableColumn fx:id="column4" prefWidth="75.0" text="ReadingsID" />
-                <TableColumn fx:id="column5" prefWidth="75.0" text="AccountID" />
-                <TableColumn fx:id="column6" prefWidth="75.0" text="ServiceID" />
+                <TableColumn fx:id="column1" prefWidth="136.0" text="Account_ID" />
+                <TableColumn fx:id="column2" prefWidth="148.0" text="Sum" />
+                <TableColumn fx:id="column3" minWidth="0.0" prefWidth="170.0" text="Apartment_Apartment_ID" />
             </columns>
         </TableView>
       <Button fx:id="leftButton" layoutX="426.0" layoutY="242.0" mnemonicParsing="false" onAction="#clickLeftButton" prefHeight="31.0" prefWidth="33.0" text="&lt;" />

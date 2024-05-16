@@ -13,11 +13,12 @@ module org.example.homeassoc {
     requires static lombok;
     requires com.fasterxml.jackson.databind;
     requires java.sql;
+    requires java.desktop;
 
     opens org.example.homeassoc to javafx.fxml;
     exports org.example.homeassoc;
     exports org.example.homeassoc.entity;
     opens org.example.homeassoc.entity to javafx.fxml;
-    exports org.example.homeassoc.tables;
-    opens org.example.homeassoc.tables to javafx.fxml;
+    exports org.example.homeassoc.controller;
+    opens org.example.homeassoc.controller to javafx.fxml;
 }

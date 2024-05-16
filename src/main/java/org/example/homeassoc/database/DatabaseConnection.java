@@ -13,6 +13,15 @@ public class DatabaseConnection {
     private static final String USER = "postgres";
     private static final String PASSWORD = "toor";
     private static Connection connection;
+    private static Boolean admin = true;
+
+    public static void setAdmin(Boolean val) {
+        admin = val;
+    }
+
+    public static Boolean getAdmin() {
+        return admin;
+    }
 
     public static Connection getInstance() throws SQLException {
         if (connection == null) {

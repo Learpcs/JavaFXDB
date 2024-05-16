@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="244.0" prefWidth="402.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.homeassoc.controller.SelectController">
+   <children>
+      <Button fx:id="button1" layoutX="30.0" layoutY="33.0" mnemonicParsing="false" onAction="#ClickButton1" prefHeight="25.0" prefWidth="163.0" text="Account" />
+      <Button fx:id="button2" layoutX="208.0" layoutY="33.0" mnemonicParsing="false" onAction="#ClickButton2" prefHeight="25.0" prefWidth="163.0" text="Account Outstanding" />
+      <Button fx:id="button3" layoutX="30.0" layoutY="70.0" mnemonicParsing="false" onAction="#ClickButton3" prefHeight="25.0" prefWidth="163.0" text="Apartment" />
+      <Button fx:id="button4" layoutX="208.0" layoutY="70.0" mnemonicParsing="false" onAction="#ClickButton4" prefHeight="25.0" prefWidth="163.0" text="Counter" />
+      <Button fx:id="button5" layoutX="30.0" layoutY="105.0" mnemonicParsing="false" onAction="#ClickButton5" prefHeight="25.0" prefWidth="163.0" text="Counter Reading" />
+      <Button fx:id="button6" layoutX="208.0" layoutY="105.0" mnemonicParsing="false" onAction="#ClickButton6" prefHeight="25.0" prefWidth="163.0" text="House" />
+      <Button fx:id="button7" layoutX="30.0" layoutY="139.0" mnemonicParsing="false" onAction="#ClickButton7" prefHeight="25.0" prefWidth="163.0" text="Journal Apartment Resident" />
+      <Button fx:id="button8" layoutX="208.0" layoutY="139.0" mnemonicParsing="false" onAction="#ClickButton8" prefHeight="25.0" prefWidth="163.0" text="Receipt for service" />
+      <Button fx:id="button9" layoutX="30.0" layoutY="176.0" mnemonicParsing="false" onAction="#ClickButton9" prefHeight="25.0" prefWidth="163.0" text="Resident" />
+      <Button fx:id="button10" layoutX="208.0" layoutY="176.0" mnemonicParsing="false" onAction="#ClickButton10" prefHeight="25.0" prefWidth="163.0" text="Service" />
+   </children>
+</Pane>
