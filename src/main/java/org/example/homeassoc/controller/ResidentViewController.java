@@ -18,6 +18,7 @@ import org.example.homeassoc.entity.Resident;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +43,12 @@ public class ResidentViewController {
 
     @FXML
     private Button createButton;
+
+    @FXML
+    private TextField searchField;
+
+
+
 
     @FXML
     public void clickCreateButton() throws SQLException {
@@ -267,6 +274,24 @@ public class ResidentViewController {
 
     @FXML
     public void initialize() throws SQLException {
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                view.setItems(getAll());
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            var kek = view.getItems();
+
+            ObservableList<Resident> new_list = FXCollections.observableArrayList();
+
+            for (Resident chel : kek) {
+                if (chel.getName().startsWith(newValue)) {
+                    new_list.add(chel);
+                }
+            }
+
+            view.setItems(new_list);
+        });
         adminBox.setSelected(DatabaseConnection.getAdmin());
         adminBox.setDisable(true);
         progressBar.setProgress(0);

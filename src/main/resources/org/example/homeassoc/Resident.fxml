@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 
+<?import javafx.scene.control.TextField?>
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="288.0" prefWidth="577.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.homeassoc.controller.ResidentViewController">
     <children>
         <TableView fx:id="view" layoutX="22.0" layoutY="23.0" prefHeight="200.0" prefWidth="456.0">
@@ -27,6 +28,7 @@
       <Button fx:id="logoutButton" layoutX="65.0" layoutY="242.0" mnemonicParsing="false" onAction="#clickLogoutButton" prefHeight="31.0" prefWidth="65.0" text="Log Out" />
       <ProgressBar fx:id="progressBar" layoutX="225.0" layoutY="248.0" prefHeight="19.0" prefWidth="154.0" progress="0.0" />
       <CheckBox fx:id="adminBox" layoutX="140.0" layoutY="248.0" mnemonicParsing="false" prefWidth="56.0" text="Admin" />
-      <Button fx:id="refreshButton" layoutX="488.0" layoutY="167.0" mnemonicParsing="false" onAction="#clickRefreshButton" prefHeight="25.0" prefWidth="83.0" text="Refresh" />
+        <Button fx:id="refreshButton" layoutX="488.0" layoutY="167.0" mnemonicParsing="false" onAction="#clickRefreshButton" prefHeight="25.0" prefWidth="83.0" text="Refresh" />
+        <TextField fx:id="searchField" layoutX="488.0" layoutY="205" prefHeight="25.0" prefWidth="83.0" text="" />
     </children>
 </Pane>

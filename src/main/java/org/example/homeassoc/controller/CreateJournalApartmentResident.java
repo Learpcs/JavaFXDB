@@ -32,7 +32,7 @@ public class CreateJournalApartmentResident {
         Connection conn = DatabaseConnection.getInstance();
 
         Statement st = conn.createStatement();
-        st.executeUpdate(String.format("INSERT INTO \"Journal Apartment Residedentn\" VALUES (%s, %s, %s, '%s')",
+        st.executeUpdate(String.format("INSERT INTO \"Journal Apartment Resident\" VALUES (%s, %s, %s, '%s')",
                 field1.getCharacters(),
                 field2.getCharacters(),
                 field3.getCharacters(),
