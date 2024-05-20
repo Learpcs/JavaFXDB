@@ -9,11 +9,11 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.example.homeassoc.Main;
 import org.example.homeassoc.database.DatabaseConnection;
 import org.example.homeassoc.entity.AccountOutstanding;
-import org.example.homeassoc.entity.ReceiptForService;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -36,13 +36,13 @@ public class AccountOutstandingViewController {
     private TableView<AccountOutstanding> view;
 
     @FXML
-    private ProgressBar progressBar;
-
-    @FXML
     private CheckBox adminBox;
 
     @FXML
     private Button createButton;
+
+    @FXML
+    private DatePicker from, to;
 
     @FXML
     public void clickCreateButton() throws SQLException {
@@ -58,7 +58,6 @@ public class AccountOutstandingViewController {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
         }
-        immitate();
         view.setItems(getAll());
     }
 
@@ -125,6 +124,9 @@ public class AccountOutstandingViewController {
 
     @FXML
     private Button deleteAllButton;
+
+    @FXML
+    private Text debt;
 
     @FXML
     public void clickDeleteAllButton() throws SQLException {
@@ -262,15 +264,56 @@ public class AccountOutstandingViewController {
 
     @FXML
     public void clickRefreshButton() throws SQLException {
-        immitate();
+        debt.setText("None");
         view.setItems(getAll());
     }
 
     @FXML
     public void initialize() throws SQLException {
+        view.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                String valueFromColumn2 = String.valueOf(newSelection.getAccount_Account_ID());
+
+                Connection conn = null;
+                try {
+                    conn = DatabaseConnection.getInstance();
+
+                    String startDate;
+                    String endDate;
+
+                    if (from.getValue() == null) {
+                        startDate ="1970-01-01";
+                    }
+                    else {
+                        startDate = from.getValue().toString();
+                    }
+
+                    if (to.getValue() == null) {
+                        endDate ="2070-01-01";
+                    }
+                    else {
+                        endDate = to.getValue().toString();
+                    }
+
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(String.format("SELECT * FROM \"Account Outstanding\" WHERE \"Account_Account_ID\" = %s AND \"Maturity_date\" BETWEEN '%s' AND '%s'", valueFromColumn2, startDate, endDate));
+                    ObservableList<AccountOutstanding> persons = FXCollections.observableArrayList();
+
+                    while (rs.next()) {
+                        persons.add(new AccountOutstanding(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getInt(4)));
+                    }
+                    rs.close();
+                    st.close();
+                    view.getSelectionModel().clearSelection();
+                    view.setItems(persons);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+                debt.setText(valueFromColumn2);
+            }
+        });
         adminBox.setSelected(DatabaseConnection.getAdmin());
         adminBox.setDisable(true);
-        progressBar.setProgress(0);
         createButton.setVisible(DatabaseConnection.getAdmin());
         updateButton.setVisible(DatabaseConnection.getAdmin());
         deleteButton.setVisible(DatabaseConnection.getAdmin());
@@ -287,47 +330,37 @@ public class AccountOutstandingViewController {
     ObservableList<AccountOutstanding> getAll() throws SQLException {
         Connection conn = DatabaseConnection.getInstance();
 
+        String startDate;
+        String endDate;
+
+        if (from.getValue() == null) {
+            startDate ="1970-01-01";
+        }
+        else {
+            startDate = from.getValue().toString();
+        }
+
+        if (to.getValue() == null) {
+            endDate ="2070-01-01";
+        }
+        else {
+            endDate = to.getValue().toString();
+        }
+
         Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery("SELECT * FROM \"Account Outstanding\"");
+        ResultSet rs = st.executeQuery(String.format("SELECT * FROM \"Account Outstanding\" WHERE \"Maturity_date\" BETWEEN '%s' AND '%s'", startDate, endDate));
         ObservableList<AccountOutstanding> persons = FXCollections.observableArrayList();
 
         while (rs.next()) {
-//            System.out.println(rs.getString(1));
-//            System.out.println(rs.getString(2));
-//            System.out.println(rs.getString(3));
-//            System.out.println(rs.getString(4));
-//            System.out.println(rs.getString(5));
-//            System.out.println(rs.getString(6));
             persons.add(new AccountOutstanding(rs.getInt(1), rs.getInt(2), rs.getDate(3), rs.getInt(4)));
         }
         rs.close();
         st.close();
+        view.getSelectionModel().clearSelection();
+        view.setItems(persons);
 
         return persons;
     }
 
-    public void immitate() {
-        Task<Void> task = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
-                for (int i = 1; i <= 100; i++) {
-                    updateProgress(i, 100);
-                    try {
-                        Thread.sleep(5);
-                    } catch (InterruptedException e) {
-                        if (isCancelled()) {
-                            updateProgress(0, 100);
-                            break;
-                        }
-                    }
-                }
-                return null;
-            }
-        };
 
-        progressBar.progressProperty().bind(task.progressProperty());
-
-        Thread thread = new Thread(task);
-        thread.start();
-    }
 }
